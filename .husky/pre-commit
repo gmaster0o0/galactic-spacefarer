@@ -1,6 +1,9 @@
 #!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
-prettier $(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g') --write --ignore-unknown
-git update-index --again
-
-npm run lint
+echo "Running lint-staged..."
+# prefer local installation; --no-install avoids network fetch
+npx --no-install lint-staged || {
+  echo "lint-staged failed. See output above for failing files/lines."
+  exit 1
+}
