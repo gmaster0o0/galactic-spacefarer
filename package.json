@@ -15,8 +15,8 @@
     "start": "cds-serve",
     "watch": "cds watch",
     "test": "jest",
-    "lint:cds": "npm exec -- cds lint",
-    "lint:eslint": "npm exec -- eslint . --ext .js,.ts",
+    "lint:cds": "npx cds lint",
+    "lint:eslint": "npx eslint . --ext .js,.ts",
     "lint": "npm run lint:cds && npm run lint:eslint",
     "format": "prettier --write \"**/*.{js,cds,json,md}\"",
     "prepare": "husky"
