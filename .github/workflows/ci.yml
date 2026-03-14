@@ -17,7 +17,6 @@ jobs:
         with:
           node-version: 24
           cache: 'npm' # Caches node_modules based on package-lock.json
-
       - name: Install Dependencies
         run: npm install
 
@@ -33,7 +32,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Install CDS CLI globally
-        run: npm install -g @sap/cds-dk
       - name: Run Lint
         run: npm run lint
 
