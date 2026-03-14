@@ -30,3 +30,6 @@ speed-measure-plugin*.json
 
 # temporary files
 tmp
+
+#coverage report
+coverage
