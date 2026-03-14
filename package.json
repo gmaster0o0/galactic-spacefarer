@@ -8,6 +8,14 @@
         "credentials": {
           "url": "data/galactic.db"
         }
+      },
+      "[test]": {
+        "db": {
+          "kind": "sqlite",
+          "credentials": {
+            "url": ":memory:"
+          }
+        }
       }
     }
   },
