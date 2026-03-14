@@ -27,3 +27,6 @@ speed-measure-plugin*.json
 # sqlite database files
 /data
 @cds-models
+
+# temporary files
+tmp
