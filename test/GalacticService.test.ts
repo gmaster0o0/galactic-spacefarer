@@ -1,7 +1,18 @@
 import cds from '@sap/cds';
+import { afterAll, beforeAll } from '@jest/globals';
 
 const { GET, expect, axios } = cds.test('.');
-axios.defaults.auth = { username: 'alice', password: '' };
+let previousAuth: any;
+
+beforeAll(() => {
+  previousAuth = axios.defaults.auth;
+  axios.defaults.auth = { username: 'alice', password: '' };
+});
+
+afterAll(async () => {
+  axios.defaults.auth = previousAuth;
+  await (cds as any).shutdown?.();
+});
 
 describe('GalacticService OData APIs', () => {
   it('serves GalacticService.Spacefarers', async () => {
