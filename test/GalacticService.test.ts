@@ -1,7 +1,7 @@
 import cds from '@sap/cds';
-import { afterAll, beforeAll } from '@jest/globals';
+import { afterAll, beforeAll, expect as jestExpect } from '@jest/globals';
 
-const { GET, expect, axios } = cds.test('.');
+const { GET, axios } = cds.test('.');
 let previousAuth: any;
 let previousTimeout: number | undefined;
 
@@ -20,7 +20,20 @@ afterAll(async () => {
 
 describe('GalacticService OData APIs', () => {
   it('serves GalacticService.Spacefarers', async () => {
-    const { data } = await GET`/odata/v4/galactic/Spacefarers ${{ params: { $select: 'ID,name' } }}`;
-    expect(data.value).to.containSubset([{ ID: 's1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6', name: 'Alara Voss' }]);
+    // eslint-disable-next-line no-console -- CI diagnostic marker before request
+    console.info('[test] starting GET /Spacefarers');
+    const request = GET`/odata/v4/galactic/Spacefarers ${{ params: { $select: 'ID,name' } }}`;
+    const watchdog = new Promise<never>((_, reject) => {
+      setTimeout(() => reject(new Error('GET /Spacefarers watchdog timeout after 12s')), 12000);
+    });
+
+    const { data }: any = await Promise.race([request, watchdog]);
+    // eslint-disable-next-line no-console -- CI diagnostic marker after request
+    console.info('[test] GET /Spacefarers completed');
+
+    const rows = data?.value ?? [];
+    const alara = rows.find((row: any) => row?.name === 'Alara Voss');
+    jestExpect(alara).toBeDefined();
+    jestExpect(alara.ID).toBe('s1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6');
   });
 });
