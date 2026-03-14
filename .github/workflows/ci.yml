@@ -2,7 +2,7 @@ name: Galactic CI
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, ci-debug]
   pull_request:
     branches: [main, master, ci-debug]
 
