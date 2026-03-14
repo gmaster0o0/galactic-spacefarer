@@ -3,14 +3,18 @@ import { afterAll, beforeAll } from '@jest/globals';
 
 const { GET, expect, axios } = cds.test('.');
 let previousAuth: any;
+let previousTimeout: number | undefined;
 
 beforeAll(() => {
   previousAuth = axios.defaults.auth;
+  previousTimeout = axios.defaults.timeout;
   axios.defaults.auth = { username: 'alice', password: '' };
+  axios.defaults.timeout = 10000;
 });
 
 afterAll(async () => {
   axios.defaults.auth = previousAuth;
+  axios.defaults.timeout = previousTimeout;
   await (cds as any).shutdown?.();
 });
 

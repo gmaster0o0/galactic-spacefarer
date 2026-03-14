@@ -10,40 +10,50 @@ jobs:
   # INIT JOB: Install and Cache
   install:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: 'npm' # Caches node_modules based on package-lock.json
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
   lint:
     needs: install
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: 'npm'
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
       - name: Run Lint
         run: npm run lint
 
   test:
     needs: install
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: 'npm'
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
       - name: Run Tests
         run: npm run test:ci
+      - name: Debug hanging process
+        if: failure() || cancelled()
+        run: |
+          echo "=== process list ==="
+          ps -ef
+          echo "=== node processes ==="
+          pgrep -af node || true
