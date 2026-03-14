@@ -50,7 +50,27 @@ jobs:
         run: npm ci
       - name: Run Tests
         timeout-minutes: 4
-        run: timeout --signal=SIGKILL 230s npm run test:ci
+        run: |
+          echo "Running tests and teeing output to test-output.log"
+          timeout --signal=SIGKILL 230s npm run test:ci 2>&1 | tee test-output.log || true
+          echo "=== tail of test-output.log ==="
+          tail -n 200 test-output.log || true
+
+      - name: Collect process snapshot
+        if: always()
+        run: |
+          ps -ef > procs.txt || true
+          pgrep -af node > node-procs.txt || true
+
+      - name: Upload test logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs
+          path: |
+            test-output.log
+            procs.txt
+            node-procs.txt
       - name: Debug hanging process
         if: failure() || cancelled()
         run: |
