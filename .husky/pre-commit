@@ -1,9 +1,5 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-echo "Running lint-staged..."
-# prefer local installation; --no-install avoids network fetch
 npx --no-install lint-staged || {
-  echo "lint-staged failed. See output above for failing files/lines."
+  echo "lint-staged failed — see output above for failing files/lines."
   exit 1
 }
