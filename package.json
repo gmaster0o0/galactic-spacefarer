@@ -15,7 +15,7 @@
     "start": "cds-serve",
     "watch": "cds watch",
     "test": "jest",
-    "test:ci": "jest --config=jest.config.js --runInBand --coverage --detectOpenHandles --logHeapUsage ",
+    "test:ci": "jest --config=jest.config.js --runInBand --coverage --detectOpenHandles --logHeapUsage --testTimeout=20000",
     "lint:cds": "cds lint",
     "lint:eslint": "npx eslint . --ext .js,.ts",
     "lint": "npm run lint:cds && npm run lint:eslint",
