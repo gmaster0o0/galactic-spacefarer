@@ -50,7 +50,7 @@ jobs:
         run: npm ci
       - name: Run Tests
         timeout-minutes: 4
-        run: npm run test:ci
+        run: timeout --signal=SIGKILL 230s npm run test:ci
       - name: Debug hanging process
         if: failure() || cancelled()
         run: |

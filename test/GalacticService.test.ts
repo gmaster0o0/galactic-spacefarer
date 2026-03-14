@@ -1,28 +1,17 @@
 import cds from '@sap/cds';
-import { afterAll, beforeAll, expect as jestExpect } from '@jest/globals';
+import { expect as jestExpect } from '@jest/globals';
 
-const { GET, axios } = cds.test('.');
-let previousAuth: any;
-let previousTimeout: number | undefined;
-
-beforeAll(() => {
-  previousAuth = axios.defaults.auth;
-  previousTimeout = axios.defaults.timeout;
-  axios.defaults.auth = { username: 'alice', password: '' };
-  axios.defaults.timeout = 10000;
-});
-
-afterAll(async () => {
-  axios.defaults.auth = previousAuth;
-  axios.defaults.timeout = previousTimeout;
-  await (cds as any).shutdown?.();
-});
+const { GET } = cds.test('.');
 
 describe('GalacticService OData APIs', () => {
   it('serves GalacticService.Spacefarers', async () => {
     // eslint-disable-next-line no-console -- CI diagnostic marker before request
     console.info('[test] starting GET /Spacefarers');
-    const request = GET`/odata/v4/galactic/Spacefarers ${{ params: { $select: 'ID,name' } }}`;
+    const request = GET`/odata/v4/galactic/Spacefarers ${{
+      params: { $select: 'ID,name' },
+      auth: { username: 'alice', password: '' },
+      timeout: 10000,
+    }}`;
     const watchdog = new Promise<never>((_, reject) => {
       setTimeout(() => reject(new Error('GET /Spacefarers watchdog timeout after 12s')), 12000);
     });
