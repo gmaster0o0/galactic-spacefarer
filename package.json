@@ -23,7 +23,8 @@
     "start": "cds-serve",
     "watch": "cds watch",
     "test": "jest",
-    "test:ci": "jest --config=jest.config.js --runInBand --coverage --logHeapUsage --testTimeout=20000 --forceExit",
+    "test:ci": "JEST_JUNIT_OUTPUT=./junit.xml jest --config=jest.config.js --runInBand --coverage --logHeapUsage --testTimeout=20000 --reporters=default --reporters=jest-junit --json --outputFile=jest-results.json",
+    "test:ci:debug": "JEST_JUNIT_OUTPUT=./junit.xml NODE_OPTIONS=\"--trace-warnings --unhandled-rejections=strict\" jest --config=jest.config.js --runInBand --coverage --logHeapUsage --testTimeout=600000 --detectOpenHandles --reporters=default --reporters=jest-junit --json --outputFile=jest-results.json",
     "lint:cds": "cds lint",
     "lint:eslint": "npx eslint . --ext .js,.ts",
     "lint": "npm run lint:cds && npm run lint:eslint",
@@ -57,7 +58,8 @@
     "prettier": "^3.8.1",
     "ts-jest": "^29.4.6",
     "tsx": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "jest-junit": "^13.0.0"
   },
   "commitlint": {
     "extends": [
