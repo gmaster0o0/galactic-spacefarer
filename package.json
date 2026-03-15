@@ -22,7 +22,9 @@
   "scripts": {
     "start": "cds-serve",
     "watch": "cds watch",
-    "test": "jest",
+    "test": "jest --config=jest.config.js --coverage --maxWorkers=50%",
+    "test:watch": "jest --config=jest.config.js --watch",
+    "test:coverage": "jest --config=jest.config.js --coverage",
     "test:ci": "JEST_JUNIT_OUTPUT=./junit.xml jest --config=jest.config.js --runInBand --coverage --logHeapUsage --testTimeout=20000 --reporters=default --reporters=jest-junit --json --outputFile=jest-results.json",
     "test:ci:debug": "JEST_JUNIT_OUTPUT=./junit.xml NODE_OPTIONS=\"--trace-warnings --unhandled-rejections=strict\" jest --config=jest.config.js --runInBand --coverage --logHeapUsage --testTimeout=600000 --detectOpenHandles --reporters=default --reporters=jest-junit --json --outputFile=jest-results.json",
     "lint:cds": "cds lint",

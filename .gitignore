@@ -32,4 +32,14 @@ speed-measure-plugin*.json
 tmp
 
 #coverage report
-coverage
+coverage/
+
+#test artifacts
+junit.xml
+jest-results.json
+test-output.log
+procs.txt
+node-procs.txt
+test-results/
+
+*.log
