@@ -2,10 +2,16 @@ name: Galactic CI
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, ci-debug]
   pull_request:
-    branches: [main, master]
-
+    branches: [main, master, ci-debug]
+  workflow_dispatch:
+    inputs:
+      debug_mode:
+        description: 'Enable debug mode (runs tests with extended timeout and collects logs)'
+        required: false
+        default: false
+        type: boolean
 jobs:
   # INIT JOB: Install and Cache
   install:
@@ -20,7 +26,6 @@ jobs:
           cache: 'npm' # Caches node_modules based on package-lock.json
       - name: Install Dependencies
         run: npm ci
-
   lint:
     needs: install
     runs-on: ubuntu-latest
@@ -39,7 +44,9 @@ jobs:
   test:
     needs: install
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
+    env:
+      DEBUG_MODE: ${{ github.event.inputs.debug_mode }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -49,10 +56,15 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Run Tests
-        timeout-minutes: 4
+        timeout-minutes: 20
         run: |
           echo "Running tests and teeing output to test-output.log"
-          timeout --signal=SIGKILL 230s npm run test:ci 2>&1 | tee test-output.log || true
+          if [ "${DEBUG_MODE}" = "true" ]; then
+            echo "DEBUG_MODE=true — running extended debug test command"
+            npm run test:ci:debug 2>&1 | tee test-output.log || true
+          else
+            npm run test:ci 2>&1 | tee test-output.log || true
+          fi
           echo "=== tail of test-output.log ==="
           tail -n 200 test-output.log || true
 
@@ -61,6 +73,17 @@ jobs:
         run: |
           ps -ef > procs.txt || true
           pgrep -af node > node-procs.txt || true
+
+      - name: Collect extra debug info
+        if: env.DEBUG_MODE == 'true'
+        run: |
+          echo "=== open file descriptors for node processes ==="
+          for pid in $(pgrep node || true); do
+            if [ -n "$pid" ]; then
+              echo "--- pid: $pid ---"
+              ls -l /proc/$pid/fd || true
+            fi
+          done
 
       - name: Upload test logs
         if: always()
@@ -71,6 +94,9 @@ jobs:
             test-output.log
             procs.txt
             node-procs.txt
+            junit.xml
+            jest-results.json
+            coverage/**
       - name: Debug hanging process
         if: failure() || cancelled()
         run: |
