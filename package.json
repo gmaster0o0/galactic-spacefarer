@@ -8,14 +8,28 @@
         "credentials": {
           "url": "data/galactic.db"
         }
+      },
+      "[test]": {
+        "db": {
+          "kind": "sqlite",
+          "credentials": {
+            "url": ":memory:"
+          }
+        }
       }
     }
   },
   "scripts": {
     "start": "cds-serve",
     "watch": "cds watch",
-    "test": "jest",
-    "lint": "cds lint",
+    "test": "jest --config=jest.config.js --coverage --maxWorkers=50%",
+    "test:watch": "jest --config=jest.config.js --watch",
+    "test:coverage": "jest --config=jest.config.js --coverage",
+    "test:ci": "JEST_JUNIT_OUTPUT=./junit.xml jest --config=jest.config.js --runInBand --coverage --logHeapUsage --testTimeout=20000 --reporters=default --reporters=jest-junit --json --outputFile=jest-results.json",
+    "test:ci:debug": "JEST_JUNIT_OUTPUT=./junit.xml NODE_OPTIONS=\"--trace-warnings --unhandled-rejections=strict\" jest --config=jest.config.js --runInBand --coverage --logHeapUsage --testTimeout=600000 --detectOpenHandles --reporters=default --reporters=jest-junit --json --outputFile=jest-results.json",
+    "lint:cds": "cds lint",
+    "lint:eslint": "npx eslint . --ext .js,.ts",
+    "lint": "npm run lint:cds && npm run lint:eslint",
     "format": "prettier --write \"**/*.{js,cds,json,md}\"",
     "prepare": "husky"
   },
@@ -24,20 +38,30 @@
     "@sap/cds": "^9"
   },
   "devDependencies": {
+    "@cap-js/cds-test": "^0.4.1",
+    "@cap-js/cds-typer": ">=0.1",
+    "@cap-js/cds-types": "^0.16.0",
     "@cap-js/sqlite": "^2",
     "@commitlint/cli": "^20.4.4",
     "@commitlint/config-conventional": "^20.4.4",
+    "@sap/cds-dk": "^9.8.1",
+    "@sap/eslint-plugin-cds": "^4",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jest": "^29.15.0",
     "eslint-plugin-prettier": "^5.5.5",
     "husky": "^9.1.7",
+    "jest": "^30.3.0",
+    "jest-junit": "^16.0.0",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
-    "@sap/eslint-plugin-cds": "^4",
-    "@cap-js/cds-types": "^0.16.0",
-    "@types/node": "^24.0.0",
+    "ts-jest": "^29.4.6",
     "tsx": "^4",
-    "typescript": "^5",
-    "@cap-js/cds-typer": ">=0.1"
+    "typescript": "^5"
   },
   "commitlint": {
     "extends": [

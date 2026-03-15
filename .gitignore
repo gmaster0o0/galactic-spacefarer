@@ -27,3 +27,19 @@ speed-measure-plugin*.json
 # sqlite database files
 /data
 @cds-models
+
+# temporary files
+tmp
+
+#coverage report
+coverage/
+
+#test artifacts
+junit.xml
+jest-results.json
+test-output.log
+procs.txt
+node-procs.txt
+test-results/
+
+*.log
