@@ -22,11 +22,14 @@
   "scripts": {
     "start": "cds-serve",
     "watch": "cds watch",
-    "test": "jest --config=jest.config.js --coverage --maxWorkers=50%",
-    "test:watch": "jest --config=jest.config.js --watch",
-    "test:coverage": "jest --config=jest.config.js --coverage",
-    "test:ci": "JEST_JUNIT_OUTPUT=./junit.xml jest --config=jest.config.js --runInBand --coverage --logHeapUsage --testTimeout=20000 --reporters=default --reporters=jest-junit --json --outputFile=jest-results.json",
-    "test:ci:debug": "JEST_JUNIT_OUTPUT=./junit.xml NODE_OPTIONS=\"--trace-warnings --unhandled-rejections=strict\" jest --config=jest.config.js --runInBand --coverage --logHeapUsage --testTimeout=600000 --detectOpenHandles --reporters=default --reporters=jest-junit --json --outputFile=jest-results.json",
+    "test": "vitest",
+    "test:unit": "vitest --project=unit",
+    "test:int": "vitest --project=int",
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
+    "test:ci": "npx vitest run --coverage --testTimeout=10000",
+    "test:ci:debug": "NODE_OPTIONS=\"--trace-warnings --unhandled-rejections=strict\" npx vitest run --coverage --testTimeout=50000",
     "lint:cds": "cds lint",
     "lint:eslint": "npx eslint . --ext .js,.ts",
     "lint": "npm run lint:cds && npm run lint:eslint",
@@ -35,7 +38,8 @@
   },
   "private": true,
   "dependencies": {
-    "@sap/cds": "^9"
+    "@sap/cds": "^9",
+    "@vitest/coverage-istanbul": "^4.1.0"
   },
   "devDependencies": {
     "@cap-js/cds-test": "^0.4.1",
@@ -46,22 +50,20 @@
     "@commitlint/config-conventional": "^20.4.4",
     "@sap/cds-dk": "^9.8.1",
     "@sap/eslint-plugin-cds": "^4",
-    "@types/jest": "^30.0.0",
     "@types/node": "^24.0.0",
     "@typescript-eslint/eslint-plugin": "^8.57.0",
     "@typescript-eslint/parser": "^8.57.0",
+    "@vitest/eslint-plugin": "^1.6.12",
+    "@vitest/ui": "^4.1.0",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-jest": "^29.15.0",
     "eslint-plugin-prettier": "^5.5.5",
     "husky": "^9.1.7",
-    "jest": "^30.3.0",
-    "jest-junit": "^16.0.0",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
-    "ts-jest": "^29.4.6",
     "tsx": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.0"
   },
   "commitlint": {
     "extends": [

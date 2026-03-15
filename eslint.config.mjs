@@ -4,7 +4,7 @@ import path from 'path';
 import cds from '@sap/cds/eslint.config.mjs';
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
-import jestPlugin from 'eslint-plugin-jest';
+import vitestPlugin from '@vitest/eslint-plugin';
 
 // compute absolute repo root (works cross-platform)
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -38,7 +38,7 @@ export default [
     files: ['**/*.ts', '**/*.cts', '**/*.mts', '**/*.tsx'],
     plugins: {
       '@typescript-eslint': tsPlugin,
-      jest: jestPlugin,
+      vitest: vitestPlugin,
     },
     languageOptions: {
       // parser must be the actual parser module object
@@ -53,10 +53,11 @@ export default [
       globals: {
         describe: 'readonly',
         it: 'readonly',
+        test: 'readonly',
         expect: 'readonly',
         beforeEach: 'readonly',
         afterEach: 'readonly',
-        jest: 'readonly',
+        vi: 'readonly',
       },
     },
     rules: {

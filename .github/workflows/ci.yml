@@ -95,7 +95,7 @@ jobs:
             procs.txt
             node-procs.txt
             junit.xml
-            jest-results.json
+            vitest-results.json
             coverage/**
       - name: Debug hanging process
         if: failure() || cancelled()
