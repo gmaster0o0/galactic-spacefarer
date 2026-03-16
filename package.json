@@ -3,6 +3,35 @@
   "version": "1.0.0",
   "cds": {
     "requires": {
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "alice": {
+            "roles": [
+              "admin"
+            ],
+            "attr": {
+              "planet": "Mars Prime"
+            }
+          },
+          "planet-x-user": {
+            "roles": [
+              "authenticated-user"
+            ],
+            "attr": {
+              "planet": "Mars Prime"
+            }
+          },
+          "planet-y-user": {
+            "roles": [
+              "authenticated-user"
+            ],
+            "attr": {
+              "planet": "Titan"
+            }
+          }
+        }
+      },
       "db": {
         "kind": "sqlite",
         "credentials": {
@@ -14,6 +43,19 @@
           "kind": "sqlite",
           "credentials": {
             "url": ":memory:"
+          }
+        },
+        "auth": {
+          "kind": "mocked",
+          "users": {
+            "alice": {
+              "roles": [
+                "admin"
+              ],
+              "attr": {
+                "planet": "Mars Prime"
+              }
+            }
           }
         }
       }
