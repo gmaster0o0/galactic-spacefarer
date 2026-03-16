@@ -27,6 +27,7 @@ export default [
       '.eslintrc.*',
       'package-lock.json',
       'yarn.lock',
+      'test-results/**',
     ],
   },
 

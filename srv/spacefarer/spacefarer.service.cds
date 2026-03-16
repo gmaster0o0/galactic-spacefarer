@@ -1,5 +1,6 @@
 using {my.galactic.adventure as my} from '../../db/index';
 
-service GalacticService {
+@path: '/spacefarer'
+service GalacticSpacefarerService {
   entity Spacefarers as projection on my.Spacefarers;
 }
