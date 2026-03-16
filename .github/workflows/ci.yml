@@ -101,9 +101,9 @@ jobs:
             test-output.log
             procs.txt
             node-procs.txt
-            junit.xml
-            vitest-results.json
-            coverage/**
+            test-results/junit.xml
+            test-results/vitest-results.json
+            test-results/coverage/**
       - name: Debug hanging process
         if: failure() || cancelled()
         run: |
