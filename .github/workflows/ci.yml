@@ -57,13 +57,15 @@ jobs:
         run: npm ci
       - name: Run Tests
         timeout-minutes: 20
+        shell: bash
         run: |
+          set -o pipefail
           echo "Running tests and teeing output to test-output.log"
           if [ "${DEBUG_MODE}" = "true" ]; then
             echo "DEBUG_MODE=true — running extended debug test command"
-            npm run test:ci:debug 2>&1 | tee test-output.log || true
+            npm run test:ci:debug 2>&1 | tee test-output.log
           else
-            npm run test:ci 2>&1 | tee test-output.log || true
+            npm run test:ci 2>&1 | tee test-output.log
           fi
           echo "=== tail of test-output.log ==="
           tail -n 200 test-output.log || true
