@@ -17,5 +17,8 @@ service GalacticSpacefarerService {
       where: 'origin_planet = $user.planet' // row-level isolation
     }
   ]
+  //enable edit the object page
+  @odata.draft.enabled
+
   entity Spacefarers as projection on my.Spacefarers;
 }

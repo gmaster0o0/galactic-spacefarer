@@ -25,7 +25,7 @@ describe('Galactic Spacefarer Service', () => {
     });
 
     it('Get Spacefarer by ID - not found', async () => {
-      const req = GET(`${servicePath}('s1a2b3c4-d5e6-f7g8-h9i0-11notexit111')`, asUser('alice'));
+      const req = GET(`${servicePath}(ID='s1a2b3c4-d5e6-f7g8-h9i0-11notexit111',IsActiveEntity=true)`, asUser('alice'));
 
       const { status, message } = await expect(req).to.be.rejectedWith(/404/i);
       expect(message).to.match(/not found/i);
@@ -33,7 +33,7 @@ describe('Galactic Spacefarer Service', () => {
     });
 
     it('Get Spacefarer by ID - invalid', async () => {
-      const req = GET(`${servicePath}('invalid_id')`, asUser('alice'));
+      const req = GET(`${servicePath}(ID='invalid_id',IsActiveEntity=true)`, asUser('alice'));
 
       const { status, message } = await expect(req).to.be.rejectedWith(/400/i);
       expect(message).to.match(/does not contain a valid UUID/i);
