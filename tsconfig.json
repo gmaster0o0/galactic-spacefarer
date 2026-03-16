@@ -15,5 +15,6 @@
       "#cds-models/*": ["./@cds-models/*"]
     },
     "isolatedModules": true
-  }
+  },
+  "include": ["**/*.ts", "global.d.ts"]
 }
