@@ -39,6 +39,18 @@ describe('Galactic Spacefarer Service', () => {
       expect(message).to.match(/does not contain a valid UUID/i);
       expect(status).to.equal(400);
     });
+
+    it('supports pagination via $top and $skip', async () => {
+      const { data } = await GET(`${servicePath}?$top=3&$skip=0`, asUser('alice'));
+
+      expect(data.value).to.have.lengthOf(3);
+    });
+
+    it('returns next page with $skip', async () => {
+      const { data } = await GET(`${servicePath}?$top=3&$skip=3`, asUser('alice'));
+
+      expect(data.value.length).to.be.greaterThan(0);
+    });
   });
   // Authentication & Authorization tests
   describe('Authentication & Authorization', () => {
@@ -52,8 +64,8 @@ describe('Galactic Spacefarer Service', () => {
     it('admin (alice) sees all spacefarers across all planets', async () => {
       const { data, status } = await GET(`${servicePath}?$select=ID,name,origin_planet`, asUser('alice'));
 
-      // alice has admin role - should see all 5 spacefarers from all planets
-      expect(data.value).to.have.lengthOf(5);
+      // alice has admin role - should see all 20 spacefarers from all planets
+      expect(data.value).to.have.lengthOf(20);
       expect(data.value).to.containSubset([
         { name: 'Alara Voss', origin_planet: 'Mars Prime' },
         { name: 'Jax Orin', origin_planet: 'Titan' },
