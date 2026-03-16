@@ -42,3 +42,4 @@ node-procs.txt
 test-results/
 
 *.log
+default-env.json
