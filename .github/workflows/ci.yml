@@ -64,11 +64,16 @@ jobs:
           if [ "${DEBUG_MODE}" = "true" ]; then
             echo "DEBUG_MODE=true — running extended debug test command"
             npm run test:ci:debug 2>&1 | tee test-output.log
+            status=$?
           else
             npm run test:ci 2>&1 | tee test-output.log
+            status=$?
           fi
-          echo "=== tail of test-output.log ==="
-          tail -n 200 test-output.log || true
+          if [ $status -ne 0 ] || [ "${DEBUG_MODE}" = "true" ]; then
+            echo "=== tail of test-output.log ==="
+            tail -n 200 test-output.log || true
+          fi
+          exit $status
 
       - name: Collect process snapshot
         if: always()
