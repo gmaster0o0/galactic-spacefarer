@@ -57,16 +57,23 @@ jobs:
         run: npm ci
       - name: Run Tests
         timeout-minutes: 20
+        shell: bash
         run: |
+          set -o pipefail
           echo "Running tests and teeing output to test-output.log"
           if [ "${DEBUG_MODE}" = "true" ]; then
             echo "DEBUG_MODE=true — running extended debug test command"
-            npm run test:ci:debug 2>&1 | tee test-output.log || true
+            npm run test:ci:debug 2>&1 | tee test-output.log
+            status=$?
           else
-            npm run test:ci 2>&1 | tee test-output.log || true
+            npm run test:ci 2>&1 | tee test-output.log
+            status=$?
           fi
-          echo "=== tail of test-output.log ==="
-          tail -n 200 test-output.log || true
+          if [ $status -ne 0 ] || [ "${DEBUG_MODE}" = "true" ]; then
+            echo "=== tail of test-output.log ==="
+            tail -n 200 test-output.log || true
+          fi
+          exit $status
 
       - name: Collect process snapshot
         if: always()
@@ -94,9 +101,9 @@ jobs:
             test-output.log
             procs.txt
             node-procs.txt
-            junit.xml
-            vitest-results.json
-            coverage/**
+            test-results/junit.xml
+            test-results/vitest-results.json
+            test-results/coverage/**
       - name: Debug hanging process
         if: failure() || cancelled()
         run: |

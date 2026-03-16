@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config';
 
-const isCI = !!process.env.CI;
+const isCI = Boolean(process.env.CI || process.env.GITHUB_ACTIONS);
 
 export default defineConfig({
   test: {
@@ -31,6 +31,7 @@ export default defineConfig({
           pool: 'forks',
           maxWorkers: 1,
           isolate: false,
+          ...(isCI ? { sequence: { groupOrder: 1 } } : {}),
         },
       },
       {
@@ -39,6 +40,7 @@ export default defineConfig({
           name: 'unit',
           environment: 'node',
           include: ['**/*.unit.spec.ts'],
+          ...(isCI ? { sequence: { groupOrder: 2 } } : {}),
         },
       },
     ],
