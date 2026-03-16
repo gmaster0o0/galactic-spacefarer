@@ -29,6 +29,7 @@ srv/
 		spacefarer.service.ts
 		spacefarer.unit.spec.ts
 test/
+  spacefarer.int.spec.ts
 test-results/
 readme.md
 package.json
@@ -64,6 +65,12 @@ Install dependencies:
 
 ```bash
 npm install
+```
+
+Deploy the service (build and prepare for runtime):
+
+```bash
+cds deploy
 ```
 
 Start the service (development watch):
