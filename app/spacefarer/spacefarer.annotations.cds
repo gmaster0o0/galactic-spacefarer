@@ -22,11 +22,13 @@ annotate GalacticSpacefarerService.Spacefarers with @(
     origin_planet,
     spacesuit_color
   ],
-  UI.PresentationVariant: {SortOrder: [{
-    $Type     : 'Common.SortOrderType',
-    Property  : stardust_collection,
-    Descending: true
-  }],
-  //Visualizations: ['@UI.LineItem']
-  },
+  UI.PresentationVariant: {
+    MaxItems      : 8,
+    SortOrder     : [{
+      $Type     : 'Common.SortOrderType',
+      Property  : stardust_collection,
+      Descending: true
+    }],
+    Visualizations: ['@UI.LineItem']
+  }
 );

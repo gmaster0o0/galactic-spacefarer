@@ -4,3 +4,18 @@ s2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7,Jax Orin,450,42,Titan,Narancs,a2b3c4d5-e6f7
 s3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8,Elara Kree,3100,88,Venus Station,Fehér,c3d4e5f6-g7h8-i9j0-k1l2-m3n4o5p6q7r8,p3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8
 s4d5e6f7-g8h9-i0j1-k2l3-m4n5o6p7q8r9,Zephyr Blane,890,76,Kepler-186f,Kék,d1f7e4a0-1b2c-4d3e-8f9g-1h2j3k4l5m6n,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6
 s5e6f7g8-h9i0-j1k2-l3m4-n5o6p7q8r9s0,Mira Sol,210,15,Föld,Zöld,a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7,p2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7
+s6f7g8h9-i0j1-k2l3-m4n5-o6p7q8r9s0t1,Cael Drynn,560,61,Mars Prime,Vörös,c3d4e5f6-g7h8-i9j0-k1l2-m3n4o5p6q7r8,p3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8
+s7g8h9i0-j1k2-l3m4-n5o6-p7q8r9s0t1u2,Lyra Venn,2200,83,Titan,Lila,d1f7e4a0-1b2c-4d3e-8f9g-1h2j3k4l5m6n,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6
+s8h9i0j1-k2l3-m4n5-o6p7-q8r9s0t1u2v3,Oryn Thal,175,22,Venus Station,Arany,a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7,p2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7
+s9i0j1k2-l3m4-n5o6-p7q8-r9s0t1u2v3w4,Sora Ix,4050,97,Kepler-186f,Fekete,c3d4e5f6-g7h8-i9j0-k1l2-m3n4o5p6q7r8,p3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8
+s0j1k2l3-m4n5-o6p7-q8r9-s0t1u2v3w4x5,Dex Arlo,730,55,Mars Prime,Szürke,d1f7e4a0-1b2c-4d3e-8f9g-1h2j3k4l5m6n,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6
+sak1l2m3-n4o5-p6q7-r8s9-t0u1v2w3x4y5,Vela Storm,1875,79,Föld,Kék,a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7,p2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7
+sbl2m3n4-o5p6-q7r8-s9t0-u1v2w3x4y5z6,Tanis Rel,990,68,Titan,Fehér,c3d4e5f6-g7h8-i9j0-k1l2-m3n4o5p6q7r8,p3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8
+scm3n4o5-p6q7-r8s9-t0u1-v2w3x4y5z6a7,Nyx Phar,320,38,Venus Station,Narancs,d1f7e4a0-1b2c-4d3e-8f9g-1h2j3k4l5m6n,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6
+sdn4o5p6-q7r8-s9t0-u1v2-w3x4y5z6a7b8,Rho Cassin,2780,91,Kepler-186f,Ezüst,a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7,p2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7
+seo5p6q7-r8s9-t0u1-v2w3-x4y5z6a7b8c9,Finn Draxx,640,57,Mars Prime,Zöld,c3d4e5f6-g7h8-i9j0-k1l2-m3n4o5p6q7r8,p3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8
+sfp6q7r8-s9t0-u1v2-w3x4-y5z6a7b8c9d0,Astra Quill,1420,74,Titan,Vörös,d1f7e4a0-1b2c-4d3e-8f9g-1h2j3k4l5m6n,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6
+sgq7r8s9-t0u1-v2w3-x4y5-z6a7b8c9d0e1,Zara Nox,5500,99,Kepler-186f,Arany,a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7,p2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7
+shr8s9t0-u1v2-w3x4-y5z6-a7b8c9d0e1f2,Obis Crane,100,11,Föld,Fekete,c3d4e5f6-g7h8-i9j0-k1l2-m3n4o5p6q7r8,p3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8
+sis9t0u1-v2w3-x4y5-z6a7-b8c9d0e1f2g3,Kael Vrix,3300,86,Venus Station,Lila,d1f7e4a0-1b2c-4d3e-8f9g-1h2j3k4l5m6n,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6
+sjt0u1v2-w3x4-y5z6-a7b8-c9d0e1f2g3h4,Pex Solara,760,63,Mars Prime,Szürke,a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7,p2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7
