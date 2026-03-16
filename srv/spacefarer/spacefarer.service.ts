@@ -1,4 +1,5 @@
 import cds from '@sap/cds';
+import { sendCosmicWelcomeEmail } from '../mail/mail.service';
 
 const minimumStardust = 100;
 const minimumWormholeSkill = 10;
@@ -6,7 +7,6 @@ export default class GalacticSpacefarerService extends cds.ApplicationService {
   async init() {
     const { Spacefarers } = this.entities;
 
-    // Task 3 – @Before: validate & enhance skills
     this.before('CREATE', Spacefarers, (req) => {
       return validateAndEnhanceSpacefarer(req);
     });
@@ -21,7 +21,7 @@ export default class GalacticSpacefarerService extends cds.ApplicationService {
 
 export function validateAndEnhanceSpacefarer(req: cds.Request<any, Record<string, any>[]>): any {
   const data = req.data;
-
+  // Validate stardust_collection
   if (data.stardust_collection === undefined) {
     return req.error(400, 'Missing stardust_collection');
   }
@@ -47,34 +47,10 @@ export function validateAndEnhanceSpacefarer(req: cds.Request<any, Record<string
   if (data.stardust_collection < minimumStardust) {
     data.stardust_collection = minimumStardust;
   }
-
+  // Cosmic minimum threshold for wormhole_navigation_skill
   if (data.wormhole_navigation_skill < minimumWormholeSkill) {
     data.wormhole_navigation_skill = minimumWormholeSkill;
   }
-  // If we reach here, validation passed and data is enhanced if needed
+
   return;
-}
-
-// fake email sender for demonstration — in production, this would be a real email transport (e.g., nodemailer)
-export async function sendCosmicWelcomeEmail(
-  spacefarer: any,
-  // injectable transport — defaults to a console logger in production
-  // eslint-disable-next-line no-unused-vars
-  transport: (payload: { to: string; subject: string; body: string }) => Promise<void> = async (payload) => {
-    // eslint-disable-next-line no-console
-    console.log(`[CosmicMail] To: ${payload.to}`);
-    // eslint-disable-next-line no-console
-    console.log(`[CosmicMail] Subject: ${payload.subject}`);
-    // eslint-disable-next-line no-console
-    console.log(`[CosmicMail] Body: ${payload.body}`);
-  },
-): Promise<void> {
-  const name = spacefarer.name || 'Spacefarer';
-  const planet = spacefarer.origin_planet || 'the cosmos';
-
-  await transport({
-    to: `${name} <spacefarer@galactic.adventure>`,
-    subject: 'Congratulations on your Cosmic Adventure!',
-    body: `Dear ${name},\n\nWelcome aboard! You have been launched from ${planet} into the SAP galaxy.\n\nMay your wormhole navigation be true.\n\nThe Galactic Spacefarers Team`,
-  });
 }

@@ -1,14 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 
-// ---------------------------------------------------------------------------
-// The two pure handler functions we will implement in spacefarer.service.ts
-// Import paths assume they are exported as named exports from the service file.
-// ---------------------------------------------------------------------------
-import { validateAndEnhanceSpacefarer, sendCosmicWelcomeEmail } from './spacefarer.service';
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
+import { validateAndEnhanceSpacefarer } from './spacefarer.service';
+import { sendCosmicWelcomeEmail } from '../mail/mail.service';
 
 /** Minimal stand-in for a CAP Request object used in @Before handlers */
 function makeMockRequest(data: Record<string, unknown>) {
@@ -17,10 +10,6 @@ function makeMockRequest(data: Record<string, unknown>) {
     error: vi.fn(),
   };
 }
-
-// ---------------------------------------------------------------------------
-// @Before CREATE – validateAndEnhanceSpacefarer
-// ---------------------------------------------------------------------------
 
 describe('validateAndEnhanceSpacefarer (@Before CREATE)', () => {
   describe('stardust_collection validation', () => {
@@ -146,10 +135,6 @@ describe('validateAndEnhanceSpacefarer (@Before CREATE)', () => {
     });
   });
 });
-
-// ---------------------------------------------------------------------------
-// @After CREATE – sendCosmicWelcomeEmail
-// ---------------------------------------------------------------------------
 
 describe('sendCosmicWelcomeEmail (@After CREATE)', () => {
   // We keep the email transport injectable so tests stay fast & offline.
