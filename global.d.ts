@@ -1,5 +1,3 @@
-// global.d.ts
-declare module 'chai-subset';
 declare global {
   namespace Chai {
     interface Assertion {
