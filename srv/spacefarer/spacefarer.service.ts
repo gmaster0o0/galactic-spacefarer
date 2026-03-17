@@ -12,6 +12,7 @@ export default class GalacticSpacefarerService extends cds.ApplicationService {
     });
 
     this.after('CREATE', Spacefarers, (spacefarer) => {
+      if (!spacefarer?.name) return;
       return sendCosmicWelcomeEmail(spacefarer);
     });
 
