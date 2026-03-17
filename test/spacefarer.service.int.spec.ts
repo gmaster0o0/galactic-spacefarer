@@ -165,14 +165,15 @@ describe('Galactic Spacefarer Service', () => {
       );
 
       expect(status).to.equal(201);
-      // CAP sets IsActiveEntity=false on fresh drafts
       expect(data.IsActiveEntity).to.equal(false);
       expect(data.HasActiveEntity).to.equal(false);
       expect(data.name).to.equal('Nova Strider');
+
+      // ✅ Clean up — discard the orphaned draft
+      await DELETE(entityUrl(data.ID, false), asUser('alice'));
     });
 
     it('draft is NOT visible in the active entity list before activation', async () => {
-      // Create a draft
       const { data: draft } = await POST(
         servicePath,
         {
@@ -184,10 +185,12 @@ describe('Galactic Spacefarer Service', () => {
         asUser('alice'),
       );
 
-      // Active list must not contain the draft
       const { data } = await GET(`${servicePath}?$filter=IsActiveEntity eq true`, asUser('alice'));
       const found = data.value.find((sf: any) => sf.ID === draft.ID);
       expect(found).to.be.undefined;
+
+      // ✅ Clean up — discard the orphaned draft
+      await DELETE(entityUrl(draft.ID, false), asUser('alice'));
     });
 
     // ── 2. ACTIVATE DRAFT ────────────────────────────────────────────────────
