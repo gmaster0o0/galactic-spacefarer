@@ -1,12 +1,63 @@
 using {GalacticSpacefarerService} from '../../srv/spacefarer/spacefarer.service';
 
 annotate GalacticSpacefarerService.Spacefarers with {
-  stardust_collection        @title: 'Stardust Collection'        @mandatory  @Common.FieldControl: #Mandatory;
-  spacesuit_color            @title: 'Spacesuit Color'            @Common.FieldControl: #Optional;
-  name                       @title: 'Name'                       @mandatory  @Core.Immutable     : true;
-  origin_planet              @title: 'Origin Planet'              @mandatory  @Core.Immutable     : true;
-  wormhole_navigation_skill  @title: 'Wormhole Navigation Skill'  @mandatory  @Core.Immutable     : true;
+  name                       @title: 'Name'                       @mandatory  @Core.Immutable: true;
+  origin_planet              @title: 'Origin Planet'              @mandatory  @Core.Immutable: true;
+  wormhole_navigation_skill  @title: 'Wormhole Navigation Skill'  @mandatory  @Core.Immutable: true;
+  stardust_collection        @title: 'Stardust Collection'        @mandatory;
+  spacesuit_color            @title: 'Spacesuit Color';
 };
+
+annotate GalacticSpacefarerService.Spacefarers with {
+  department @(
+    title : 'Department',
+    Common: {
+      Text           : department.name,
+      TextArrangement: #TextOnly,
+      ValueList      : {
+        CollectionPath: 'Departments',
+        Parameters    : [
+          {
+            $Type            : 'Common.ValueListParameterOut',
+            LocalDataProperty: department_ID,
+            ValueListProperty: 'ID'
+          },
+          {
+            $Type            : 'Common.ValueListParameterDisplayOnly',
+            ValueListProperty: 'name'
+          }
+        ]
+      }
+    }
+  );
+
+  position   @(
+    title : 'Position',
+    Common: {
+      Text           : position.title,
+      TextArrangement: #TextOnly,
+      ValueList      : {
+        CollectionPath: 'Positions',
+        Parameters    : [
+          {
+            $Type            : 'Common.ValueListParameterOut',
+            LocalDataProperty: position_ID,
+            ValueListProperty: 'ID'
+          },
+          {
+            $Type            : 'Common.ValueListParameterDisplayOnly',
+            ValueListProperty: 'title'
+          },
+          {
+            $Type            : 'Common.ValueListParameterDisplayOnly',
+            ValueListProperty: 'rank'
+          }
+        ]
+      }
+    }
+  );
+};
+
 
 annotate GalacticSpacefarerService.Spacefarers with @(
   UI.LineItem           : [
@@ -72,7 +123,23 @@ annotate GalacticSpacefarerService.Spacefarers with @(
         $Type: 'UI.DataField',
         Value: spacesuit_color,
         Label: 'Spacesuit Color'
-      }
+      },
+      {
+        $Type: 'UI.DataField',
+        Value: department.name,
+        Label: 'Department'
+      },
+      {
+        $Type: 'UI.DataField',
+        Value: position.title,
+        Label: 'Position'
+      },
+      {
+        $Type: 'UI.DataField',
+        Value: position.rank,
+        Label: 'Rank'
+      },
+
     ]
   },
 
