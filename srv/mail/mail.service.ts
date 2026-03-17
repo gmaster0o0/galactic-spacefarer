@@ -8,6 +8,11 @@ export type MailPayload = {
 // using nodemailer instead of cds.MailService for better local usage
 // The transport is injectable for easy mocking in tests.
 const defaultTransport = async (payload: MailPayload): Promise<void> => {
+  if (!process.env.SMTP_HOST) {
+    console.log(`[mail] SMTP not configured, skipping email to ${payload.to}`);
+    return;
+  }
+
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST, // sandbox.smtp.mailtrap.io
     port: Number(process.env.SMTP_PORT), // 2525

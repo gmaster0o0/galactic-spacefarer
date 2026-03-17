@@ -1,11 +1,11 @@
 using {GalacticSpacefarerService} from '../../srv/spacefarer/spacefarer.service';
 
 annotate GalacticSpacefarerService.Spacefarers with {
-  stardust_collection       @Common.FieldControl: #Mandatory;
-  spacesuit_color           @Common.FieldControl: #Optional;
-  name                      @Common.FieldControl: #ReadOnly;
-  origin_planet             @Common.FieldControl: #ReadOnly;
-  wormhole_navigation_skill @Common.FieldControl: #ReadOnly;
+  stardust_collection        @title: 'Stardust Collection'        @mandatory  @Common.FieldControl: #Mandatory;
+  spacesuit_color            @title: 'Spacesuit Color'            @Common.FieldControl: #Optional;
+  name                       @title: 'Name'                       @mandatory  @Core.Immutable     : true;
+  origin_planet              @title: 'Origin Planet'              @mandatory  @Core.Immutable     : true;
+  wormhole_navigation_skill  @title: 'Wormhole Navigation Skill'  @mandatory  @Core.Immutable     : true;
 };
 
 annotate GalacticSpacefarerService.Spacefarers with @(
