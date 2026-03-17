@@ -377,4 +377,40 @@ describe('Galactic Spacefarer Service', () => {
       expect(status).to.equal(200);
     });
   });
+
+  //OData Metadata testing
+  describe('OData Metadata testing', () => {
+    it('exposes valid OData metadata', async () => {
+      const { status, data } = await GET('/spacefarer/$metadata', asUser('alice'));
+      expect(status).to.equal(200);
+      expect(data).to.include('GalacticSpacefarerService');
+    });
+
+    it('Spacefarers entity is draft-enabled', async () => {
+      const { data } = await GET('/spacefarer/$metadata', asUser('alice'));
+      expect(data).to.include('draftActivate');
+      expect(data).to.include('draftEdit');
+      expect(data).to.include('IsActiveEntity');
+    });
+
+    it('Spacefarers entity exposes all required fields', async () => {
+      const { data } = await GET('/spacefarer/$metadata', asUser('alice'));
+      expect(data).to.include('stardust_collection');
+      expect(data).to.include('wormhole_navigation_skill');
+      expect(data).to.include('origin_planet');
+      expect(data).to.include('spacesuit_color');
+    });
+
+    it('Departments and Positions are exposed as readonly entities', async () => {
+      const { data } = await GET('/spacefarer/$metadata', asUser('alice'));
+      expect(data).to.include('EntityType Name="Departments"');
+      expect(data).to.include('EntityType Name="Positions"');
+    });
+
+    it('metadata endpoint requires authentication', async () => {
+      const req = GET('/spacefarer/$metadata');
+      const { status } = await expect(req).to.be.rejectedWith(/401/i);
+      expect(status).to.equal(401);
+    });
+  });
 });
