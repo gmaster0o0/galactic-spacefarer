@@ -19,6 +19,7 @@ service GalacticSpacefarerService {
   ]
   //enable edit the object page
   @odata.draft.enabled
+  entity Spacefarers as projection on my.Spacefarers;
 
   @readonly
   entity Departments as projection on my.Departments;
@@ -26,5 +27,5 @@ service GalacticSpacefarerService {
   @readonly
   entity Positions   as projection on my.Positions;
 
-  entity Spacefarers as projection on my.Spacefarers;
+
 }
