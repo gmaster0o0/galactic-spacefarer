@@ -9,32 +9,41 @@ A Cloud Application Programming (CAP) project for the Galactic Spacefarer demo.
 Root overview (important folders and files):
 
 ```
-@cds-models/
-app/
-data/
-db/
-	index.cds
-	spacefarer/
-		departments.schema.cds
-		positions.schema.cds
-		spacefarer.schema.cds
-scripts/
-srv/
-	index.cds
-	mail/
-		mail.service.ts
-		mail.service.unit.spec.ts
-	spacefarer/
-		spacefarer.service.cds
-		spacefarer.service.ts
-		spacefarer.unit.spec.ts
-test/
-  spacefarer.int.spec.ts
-test-results/
-readme.md
-package.json
-tsconfig.json
-vitest.config.ts
+galactic-spacefarer
+├── app
+│   └── spacefarer
+│       └── spacefarer.annotations.cds
+├── db
+│   ├── data
+│   │   ├── my.galactic.adventure-Departments.csv
+│   │   ├── my.galactic.adventure-Positions.csv
+│   │   └── my.galactic.adventure-Spacefarers.csv
+│   ├── index.cds
+│   └── spacefarer
+│       ├── departments.schema.cds
+│       ├── positions.schema.cds
+│       └── spacefarer.schema.cds
+├── default-env.json.example
+├── eslint.config.mjs
+├── global.d.ts
+├── package-lock.json
+├── package.json
+├── readme.md
+├── scripts
+├── srv
+│   ├── index.cds
+│   ├── mail
+│   │   ├── mail.service.ts
+│   │   └── mail.service.unit.spec.ts
+│   └── spacefarer
+│       ├── spacefarer.service.cds
+│       ├── spacefarer.service.ts
+│       └── spacefarer.unit.spec.ts
+├── test
+│   ├── spacefarer.service.int.spec.ts
+│   └── tsx-setup.cjs
+├── tsconfig.json
+└── vitest.config.ts
 ```
 
 **Quick map**:
@@ -70,7 +79,7 @@ npm install
 Deploy the service (build and prepare for runtime):
 
 ```bash
-cds deploy
+npm run deploy
 ```
 
 Start the service (development watch):

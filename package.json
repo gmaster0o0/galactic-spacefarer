@@ -4,6 +4,7 @@
   "scripts": {
     "start": "cds serve",
     "watch": "cds watch",
+    "deploy": "cds deploy --to sqlite:data/galactic.db",
     "test": "vitest",
     "test:unit": "vitest --project=unit",
     "test:int": "vitest --project=int",
