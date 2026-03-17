@@ -8,8 +8,13 @@ export type MailPayload = {
 // using nodemailer instead of cds.MailService for better local usage
 // The transport is injectable for easy mocking in tests.
 const defaultTransport = async (payload: MailPayload): Promise<void> => {
-  if (!process.env.SMTP_HOST) {
-    console.log(`[mail] SMTP not configured, skipping email to ${payload.to}`);
+  const isTestRun = process.env.NODE_ENV === 'test' || !!process.env.VITEST;
+  const mailDisabled = process.env.MAIL_ENABLED === 'false';
+
+  // Skip real SMTP in test or when explicitly disabled.
+  // Keep injected/mock transport behavior intact if you support that.
+  if (isTestRun || mailDisabled || !process.env.SMTP_HOST) {
+    console.log(`[mail] skipped email to ${payload.to} (test/disabled/no SMTP)`);
     return;
   }
 
