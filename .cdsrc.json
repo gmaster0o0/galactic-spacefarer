@@ -1,4 +1,5 @@
 {
+  "typescript": true,
   "requires": {
     "[development]": {
       "auth": {

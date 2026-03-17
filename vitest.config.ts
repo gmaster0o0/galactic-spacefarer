@@ -13,8 +13,9 @@ export default defineConfig({
       : ['default'],
 
     coverage: {
-      provider: 'istanbul',
+      provider: 'v8',
       reporter: ['text', 'lcov', 'html', 'cobertura'],
+      include: ['srv/**/*.ts'],
       exclude: ['node_modules', 'test', 'db/data', '**/*.csv'],
       reportsDirectory: 'test-results/coverage',
     },
@@ -28,6 +29,7 @@ export default defineConfig({
           name: 'int',
           environment: 'node',
           include: ['**/*.int.spec.ts'],
+          setupFiles: ['./test/tsx-setup.cjs'],
           pool: 'forks',
           maxWorkers: 1,
           isolate: false,
