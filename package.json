@@ -20,6 +20,7 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^9",
+    "cds-plugin-ui5": "^0.13.6",
     "nodemailer": "^8.0.2"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
     "@commitlint/cli": "^20.4.4",
     "@commitlint/config-conventional": "^20.4.4",
     "@sap/cds-dk": "^9.8.1",
+    "@sap/ux-ui5-tooling": "^1.22.0",
     "@sap/eslint-plugin-cds": "^4",
     "@types/chai": "^5.2.3",
     "@types/chai-as-promised": "^8.0.2",
